@@ -144,7 +144,6 @@ exports.config = {
         timeout: 60000
     },
 
-    //
     // =====
     // Hooks
     // =====
