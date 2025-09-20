@@ -28,6 +28,9 @@ jobs:
         run: npx wdio run ./wdio.conf.js
         env:
             API_URL: 'https://serverest.dev'
+        
+      - name: Ensure allure executable permissions
+        run: chmod +x node_modules/.bin/allure  
 
       - name: Generate Allure Report
         run: npx allure generate allure-results --clean -o allure-report
