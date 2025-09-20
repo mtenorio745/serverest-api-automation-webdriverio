@@ -25,7 +25,9 @@ jobs:
         run: chmod +x node_modules/.bin/wdio
 
       - name: Ensure allure executable permissions
-        run: chmod +x node_modules/allure-commandline/dist/bin/allure
+        run: |
+          chmod +x node_modules/.bin/allure
+          chmod +x node_modules/allure-commandline/dist/bin/allure
         
       - name: Run WebdriverIO tests
         run: npx wdio run ./wdio.conf.js
