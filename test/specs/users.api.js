@@ -3,7 +3,7 @@ const { faker } = require('@faker-js/faker');
 
 class UsersAPI {
   constructor() {
-    this.baseUrl = 'http://localhost:3000';
+    this.baseUrl = process.env.API_URL || 'http://localhost:3000';
     this.token = '';
   }
 
