@@ -6,7 +6,7 @@
 
 Este projeto automatiza a suíte de testes da API **ServeRest**, focando nos endpoints de gerenciamento de usuários. A automação foi desenvolvida com o framework **WebdriverIO** e segue o padrão **Page Object** para organizar as requisições, tornando os testes mais escaláveis e fáceis de manter.
 
-Integrado a um pipeline de CI/CD com **GitHub Actions**, o projeto garante a execução contínua e a verificação da API.
+Integrado a uma pipeline de CI/CD com **GitHub Actions**, o projeto garante a execução contínua e a verificação da API.
 
 **Acesse o [relatório de testes completo](https://mtenorio745.github.io/serverest-api-automation-webdriverio/) para ver os resultados detalhados.**
 
