@@ -1,95 +1,79 @@
-# Automação de Testes de API - ServeRest
+# 🔗 Automação de Testes de API - ServeRest
 
-Este projeto contém um conjunto de testes automatizados para a API RESTful do ServeRest, cobrindo os principais endpoints de gerenciamento de usuários.
+---
 
-A automação foi desenvolvida com foco em boas práticas, como o padrão **Page Object** para organizar as requisições e validações, e está integrada a uma pipeline de CI/CD para execução automática.
+## 📄 Sobre o Projeto
 
-### Tecnologias Utilizadas
+Este projeto automatiza a suíte de testes da API **ServeRest**, focando nos endpoints de gerenciamento de usuários. A automação foi desenvolvida com o framework **WebdriverIO** e segue o padrão **Page Object** para organizar as requisições, tornando os testes mais escaláveis e fáceis de manter.
 
-  * **Linguagem:** JavaScript
-  * **Framework de Automação:** WebdriverIO
-  * **Gerenciador de Testes:** Mocha
-  * **Biblioteca de Asserções:** Chai
-  * **Gerador de Dados:** `@faker-js/faker`
-  * **API Local:** Docker
-  * **CI/CD:** GitHub Actions
-  * **Relatórios:** Allure Report
+Integrado a um pipeline de CI/CD com **GitHub Actions**, o projeto garante a execução contínua e a verificação da API.
 
------
+**Acesse o [relatório de testes completo](https://mtenorio745.github.io/serverest-api-automation-webdriverio/) para ver os resultados detalhados.**
 
-### Configuração e Execução do Ambiente
+---
 
-Para rodar os testes localmente, siga os passos abaixo.
+## 🛠️ Tecnologias Utilizadas
 
-1.  **Clone o repositório:**
+* **JavaScript**: Linguagem de programação.
+* **WebdriverIO**: Framework de automação de testes.
+* **Mocha**: Gerenciador de testes.
+* **Chai**: Biblioteca de asserções.
+* **@faker-js/faker**: Gerador de dados de teste.
+* **Docker**: Para rodar a API localmente.
+* **GitHub Actions**: Pipeline de CI/CD.
+* **Allure Report**: Para gerar relatórios detalhados.
 
-    ```bash
-    git clone https://github.com/mtenorio745/serverest-api-automation-webdriverio.git
-    cd serve-rest-api-automation-webdriverio
-    ```
+---
 
-2.  **Inicie a API no Docker:**
+## ⚙️ Como Executar os Testes
 
-      * Certifique-se de que o Docker está instalado e em execução na sua máquina.
-      * Rode o comando para iniciar a API na porta `3000`.
+### Pré-requisitos
 
-    <!-- end list -->
+* Docker (instalado e em execução).
+* Node.js (versão 18+).
 
-    ```bash
-    docker run -p 3000:3000 paulogoncalvesbh/serverest:latest
-    ```
+### Instalação
 
-3.  **Instale as dependências do projeto:**
+1.  Clone o repositório:
+    `git clone https://github.com/mtenorio745/serverest-api-automation-webdriverio.git`
+    `cd serverest-api-automation-webdriverio`
+2.  Instale as dependências:
+    `npm install`
 
-    ```bash
-    npm install
-    ```
+### Execução Local
 
-4.  **Execute os testes:**
+1.  Inicie a API com Docker:
+    `docker run -p 3000:3000 paulogoncalvesbh/serverest:latest`
+2.  Execute a suíte de testes:
+    `npx wdio run ./wdio.conf.js`
 
-      * Rode o comando para iniciar a suíte de testes.
+---
 
-    <!-- end list -->
+## 📈 Cenários de Teste
 
-    ```bash
-    npx wdio run ./wdio.conf.js
-    ```
+A automação cobre 100% dos fluxos funcionais para os endpoints de usuário, incluindo "caminho feliz" e cenários de falha.
 
------
+* **Fluxo de Sucesso (`usersApi.spec.js`)**: Testes para registro, login, busca, atualização e exclusão de usuários.
+* **Cenários de Falha (`usersNegative.spec.js`)**: Testes para validar falhas, como e-mail duplicado ou credenciais inválidas.
+* **Teste de Limitação de Taxa (`rateLimit.spec.js`)**: Valida o comportamento da API sob alta carga, observando que o limite de taxa não é aplicado por padrão.
 
-### Cenários de Teste Cobertos
+---
 
-A suíte de testes garante 100% da cobertura funcional para os endpoints de usuário, cobrindo o "caminho feliz" e cenários de falha.
+## 📊 Relatório Allure
 
-  * **Fluxo de Sucesso (`usersApi.spec.js`)**
+O relatório de testes é gerado em cada execução e pode ser visualizado online ou localmente.
 
-      * Registro de um novo usuário.
-      * Login para obter o token JWT.
-      * Listagem e busca de usuários por ID.
-      * Atualização de informações do usuário.
-      * Exclusão do usuário.
+**Acesse o [relatório mais recente aqui](https://mtenorio745.github.io/serverest-api-automation-webdriverio/).**
 
-  * **Cenários de Falha (`usersNegative.spec.js`)**
+### Visualização Local
 
-      * Falha ao registrar um usuário com e-mail duplicado.
-      * Falha ao fazer login com credenciais inválidas.
-      * Falha ao tentar buscar um usuário com ID que não existe.
-      * Falha ao tentar atualizar um usuário com um e-mail já em uso.
-      * Comportamento de `PUT` que cria um novo usuário se o ID não existir.
+1.  Instale a ferramenta Allure globalmente:
+    `npm install -g allure-commandline`
+2.  Gere e abra o relatório:
+    `npx allure serve allure-results`
 
-  * **Teste de Limitação de Taxa (`rateLimit.spec.js`)**
+---
 
-      * O teste envia mais de 100 requisições para o endpoint `/usuarios` para verificar a limitação. **Conclusão:** O ambiente Docker da API ServeRest não aplica o limite de taxa por padrão, e o teste valida que um status code `200` é retornado mesmo sob alta carga.
+## 🧑‍💻 Autor
 
------
-
-### Pipeline de CI/CD e Relatórios
-
-A pipeline de CI/CD foi configurada para rodar automaticamente no GitHub Actions em cada `push` ou `pull request` para a branch `main`.
-
-**Como ver o relatório Allure:**
-
-1.  Acesse a aba **`Actions`** do repositório no GitHub.
-2.  Clique na última execução da pipeline.
-3.  Na seção de artefatos (**`Artifacts`**), baixe o arquivo **`allure-report`**.
-4.  Descompacte o arquivo e abra o `index.html` para visualizar o relatório detalhado.
+**Mateus Tenório** - [mtenorio745](https://github.com/mtenorio745)
